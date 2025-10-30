@@ -26,7 +26,7 @@ public class Bilde extends Tekst {
 
 	@Override
 	public String toString() {
-		return "BILDE\n" + super.toString() + this.url + "\n";
+		return super.toString() + this.url + "\n";
 
 	}
 

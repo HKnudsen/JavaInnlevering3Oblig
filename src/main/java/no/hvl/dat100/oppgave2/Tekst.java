@@ -31,7 +31,7 @@ public class Tekst extends Innlegg {
 
 	@Override
 	public String toString() {
-		return "TEKST\n" + super.toString() + this.tekst + "\n";
+		return super.toString() + this.tekst + "\n";
 
 	}
 	
