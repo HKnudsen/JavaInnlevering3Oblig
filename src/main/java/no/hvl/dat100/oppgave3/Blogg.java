@@ -2,6 +2,7 @@ package no.hvl.dat100.oppgave3;
 
 import no.hvl.dat100.common.TODO;
 import no.hvl.dat100.oppgave1.*;
+import no.hvl.dat100.oppgave2.Tekst;
 
 public class Blogg {
 
@@ -25,8 +26,10 @@ public class Blogg {
 	
 	public int finnInnlegg(Innlegg innlegg) {
         for (int i = 0; i < tabell.length; i++){
-            if (innlegg.getId() == tabell[i].getId()) {
-                return i;
+            if (tabell[i] != null) {
+                if (innlegg.getId() == tabell[i].getId()) {
+                    return i;
+                }
             }
         }
         return -1;
@@ -58,7 +61,7 @@ public class Blogg {
 	}
 	
 	public String toString() {
-		String returnString = "";
+		String returnString = String.valueOf(this.nesteLedig) + "\n";
 
         for (Innlegg i : this.tabell) {
             returnString += i.toString();
@@ -69,23 +72,62 @@ public class Blogg {
 	// valgfrie oppgaver nedenfor
 	
 	public void utvid() {
-		throw new UnsupportedOperationException(TODO.method());
+		int newLength = this.tabell.length * 2;
+        Innlegg[] nyTabell = new Innlegg[newLength];
+        for (int i = 0; i < this.tabell.length; i++) {
+            nyTabell[i] = this.tabell[i];
+        }
+        this.tabell = nyTabell;
 	}
 	
 	public boolean leggTilUtvid(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
-		
+        if (ledigPlass() && !finnes(innlegg)) {
+            leggTil(innlegg);
+            return true;
+        } else if (!ledigPlass() && !finnes(innlegg)) {
+            utvid();
+            leggTil(innlegg);
+            return true;
+        }
+		return false;
 	}
 	
 	public boolean slett(Innlegg innlegg) {
-		
-		throw new UnsupportedOperationException(TODO.method());
+        for (int i = 0; i < this.tabell.length; i++) {
+            if (this.tabell[i] != null) {
+                if (innlegg.getId() == this.tabell[i].getId()) {
+                    this.tabell[i] = null;
+                    return true;
+                }
+            }
+        }
+
+        return false;
 	}
 	
 	public int[] search(String keyword) {
-		
-		throw new UnsupportedOperationException(TODO.method());
+        int[] resultId;
+        int antall = 0;
+        int plassering = 0;
+
+        for (int i = 0; i < this.tabell.length; i++) {
+            if (tabell[i] != null) {
+                antall++;
+            }
+        }
+
+        resultId = new int[antall];
+
+        for (int i = 0; i < this.tabell.length; i++) {
+            if (tabell[i] != null) {
+                if (tabell[i] instanceof Tekst) {
+                    if (((Tekst) tabell[i]).getTekst().contains(keyword)) {
+                        resultId[plassering] = tabell[i].getId();
+                    }
+                }
+            }
+        }
+        return resultId;
 
 	}
 }
