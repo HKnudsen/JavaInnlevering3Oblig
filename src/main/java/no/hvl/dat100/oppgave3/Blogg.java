@@ -5,46 +5,65 @@ import no.hvl.dat100.oppgave1.*;
 
 public class Blogg {
 
-	// TODO: objektvariable 
+	private Innlegg[] tabell;
+    private int nesteLedig = 0;
 
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
-	}
-
+        this.tabell = new Innlegg[20];
+    }
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		this.tabell = new Innlegg[lengde];
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		return nesteLedig;
 	}
 	
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		return this.tabell;
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+        for (int i = 0; i < tabell.length; i++){
+            if (innlegg.getId() == tabell[i].getId()) {
+                return i;
+            }
+        }
+        return -1;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+		if (this.finnInnlegg(innlegg) != -1) {
+            return true;
+        }
+        return false;
 	}
 
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		for (Innlegg i : this.tabell) {
+            if (i == null) {
+                return true;
+            }
+        }
+        return false;
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+        if (ledigPlass() && !finnes(innlegg)) {
+            this.tabell[nesteLedig] = innlegg;
+            this.nesteLedig += 1;
+            return true;
+        }
+        return false;
 	}
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+		String returnString = "";
+
+        for (Innlegg i : this.tabell) {
+            returnString += i.toString();
+        }
+        return returnString;
 	}
 
 	// valgfrie oppgaver nedenfor
