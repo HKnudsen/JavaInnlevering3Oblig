@@ -22,8 +22,8 @@ public class LesBlogg {
 	private static String BILDE = "BILDE";
 
 	public static Blogg les(String mappe, String filnavn) {
+        throw new UnsupportedOperationException(TODO.method());
 
-        
 
 	}
 }
