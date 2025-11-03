@@ -61,10 +61,11 @@ public class Blogg {
 	}
 	
 	public String toString() {
-		String returnString = String.valueOf(this.nesteLedig) + "\n";
+		String returnString = this.nesteLedig + "\n";
 
         for (Innlegg i : this.tabell) {
-            returnString += i.toString();
+            if (i != null)
+                returnString += i.toString();
         }
         return returnString;
 	}
@@ -97,10 +98,12 @@ public class Blogg {
             if (this.tabell[i] != null) {
                 if (innlegg.getId() == this.tabell[i].getId()) {
                     this.tabell[i] = null;
+                    this.nesteLedig -= 1;
                     return true;
                 }
             }
         }
+
 
         return false;
 	}

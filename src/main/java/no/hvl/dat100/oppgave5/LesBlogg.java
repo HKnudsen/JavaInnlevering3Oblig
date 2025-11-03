@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 import no.hvl.dat100.common.TODO;
@@ -22,7 +23,7 @@ public class LesBlogg {
 
 	public static Blogg les(String mappe, String filnavn) {
 
-		throw new UnsupportedOperationException(TODO.method());
+        
 
 	}
 }
